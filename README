@@ -1,0 +1,16 @@
+# NetBox Sync
+
+Projeto de sincronização entre Proxmox, PBS, TrueNAS, Zabbix e NetBox.
+
+## Ambiente
+
+- NetBox Community 4.5.2
+- Python 3.12
+- Ubuntu 24.04
+
+## Instalação
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt

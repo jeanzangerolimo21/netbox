@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+*.swp
+config.yaml.bkp
+conf-bkp/
+o3web.csv
+/etc/netbox-sync.env
+config.yaml
+test_auth.py
