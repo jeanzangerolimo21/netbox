@@ -11,3 +11,5 @@ o3web.csv
 /etc/netbox-sync.env
 config.yaml
 test_auth.py
+netbox-sync.env
+netbox-sync.env
