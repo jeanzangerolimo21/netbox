@@ -5,6 +5,19 @@ from collectors.o3web import O3WebCollector
 from utils.logger import log
 from utils.config import load_config
 
+from services.proxmox_sync import (
+    ProxmoxSyncService
+)
+
+from services.environment_sync import (
+    EnvironmentSyncService
+)
+
+
+from models.sync_context import (
+    SyncContext
+)
+
 
 def main():
 
@@ -30,6 +43,12 @@ def main():
         .load_inventory()
     )
 
+    context = SyncContext(
+        zabbix_cache=zabbix_cache,
+        pbs_backup_map=pbs_backup_map,
+        csv_inventory=csv_inventory
+    )
+
     log(
         f"Zabbix: "
         f"{len(zabbix_cache)} hosts"
@@ -45,11 +64,11 @@ def main():
         f"{len(csv_inventory)} registros"
     )
 
-    #
-    # Aqui entra process_proxmox()
-    # na próxima etapa
-    #
-
+    EnvironmentSyncService(
+        config,
+        context
+    ).run()
+     
     log(
         "Sincronismo finalizado"
     )
