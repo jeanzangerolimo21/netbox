@@ -1046,46 +1046,6 @@ def sync_interfaces(nb_vm, proxmox, node, vmid, proxmox_config):
                 ) 
 
             
-            #if mac:
-
-                #current_cf = dict(nb_vm.custom_fields)
-
-                #current_cf["primary_mac"] = mac
-
-                #nb_vm.update({
-                    #"custom_fields": current_cf
-                #})
-    
-# --- COLOQUE ESTA FUNÇÃO LOGO APÓS A FUNÇÃO log(msg) ---
-
-def load_csv_inventory(file_path):
-    csv_data = {}
-    if not os.path.exists(file_path):
-        log(f"[CSV ERROR] Arquivo não encontrado em: {file_path}")
-        return csv_data
-        
-    try:
-        with open(file_path, mode='r', encoding='utf-8-sig') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                vmid = row.get('VMID')
-                if vmid and vmid.strip():
-                    # Usamos os nomes exatos das colunas do seu arquivo o3web.csv
-                    csv_data[vmid.strip()] = {
-                        "chave": row.get("chave_ativacao"),
-                        "id": row.get("id_licenca"),
-                        "tipo": row.get("tipo_licenca"),
-                        "users": row.get("usuarios_licenca"),
-                        "data": row.get("data_ativacao"),
-                        "url": row.get("url_cliente")
-                    }
-        log(f"[CSV] Inventário carregado: {len(csv_data)} registros.")
-    except Exception as e:
-        log(f"[CSV ERROR] Falha ao processar CSV: {e}")
-    return csv_data
-
-# Carrega o cache do CSV uma única vez no início
-csv_inventory = load_csv_inventory('/opt/netbox-sync/o3web.csv')
 
 # =========================================================
 # PROCESSING
